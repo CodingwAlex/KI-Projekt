@@ -1,4 +1,10 @@
-Agrar- und Forst­wissenschaften
+# Empfehlung des Studienbereichs anhand der Antworten auf die Fragen über menschliche Eigenschaften
+## Utilities: 
+>csv-Datei, die Werte aus Antworten und id des Studienbereichs enthält. Antworten kommen aus Internet oder aus anderem Netzt(zB ChatGpt).
+## Vorgang: 
+>Antworten auslesen->Netz mit Hilfe der vorgegebenen Antworten tranieren lassen->Anhand Antworten des Users die Vorhersage machen.
+## Studienbereiche:
+>Agrar- und Forst­wissenschaften
 Gesellschafts- und Sozial­wissenschaften
 Ingenieur­wissenschaften
 Kunst, Musik, Design
@@ -7,7 +13,8 @@ Medizin, Gesund­heitswissen­schaften
 Sprach- und Kulturwissen­schaften
 Wirtschafts- und Rechts­wissenschaften
 Lehramt
-Öffentliche Verwaltung
+Öffentliche Verwaltung>
+## Fragen:
 📊 Selbsteinschätzung 1–10 für Studienbereiche
 🌿 Agrar- & Forstwissenschaften
 
