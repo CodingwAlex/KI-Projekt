@@ -5,93 +5,93 @@
 >Antworten auslesen->Netz mit Hilfe der vorgegebenen Antworten tranieren lassen->Anhand Antworten des Users die Vorhersage machen.
 ## Studienbereiche:
 >Agrar- und Forst­wissenschaften
-Gesellschafts- und Sozial­wissenschaften
-Ingenieur­wissenschaften
-Kunst, Musik, Design
-Mathematik, Natur­wissenschaften
-Medizin, Gesund­heitswissen­schaften
-Sprach- und Kulturwissen­schaften
-Wirtschafts- und Rechts­wissenschaften
-Lehramt
-Öffentliche Verwaltung>
+>Gesellschafts- und Sozial­wissenschaften
+>Ingenieur­wissenschaften
+>Kunst, Musik, Design
+>Mathematik, Natur­wissenschaften
+>Medizin, Gesund­heitswissen­schaften
+>Sprach- und Kulturwissen­schaften
+>Wirtschafts- und Rechts­wissenschaften
+>Lehramt
+>Öffentliche Verwaltung
 ## Fragen:
-📊 Selbsteinschätzung 1–10 für Studienbereiche
-🌿 Agrar- & Forstwissenschaften
+### 📊 Selbsteinschätzung 1–10 für Studienbereiche
+>🌿 Agrar- & Forstwissenschaften
 
-Ich arbeite gern draußen in der Natur.
+>Ich arbeite gern draußen in der Natur.
 
-Nachhaltigkeit, Ökosysteme und Umwelt interessieren mich sehr.
+>Nachhaltigkeit, Ökosysteme und Umwelt interessieren mich sehr.
 
-Ich kann mir Labor- oder Feldarbeit vorstellen.
+>Ich kann mir Labor- oder Feldarbeit vorstellen.
 
-🧑‍🤝‍🧑 Gesellschafts- & Sozialwissenschaften
+>🧑‍🤝‍🧑 Gesellschafts- & Sozialwissenschaften
 
-Ich analysiere gern menschliches Verhalten und soziale Strukturen.
+>Ich analysiere gern menschliches Verhalten und soziale Strukturen.
 
-Politik, Gesellschaft und Kultur interessieren mich stark.
+>Politik, Gesellschaft und Kultur interessieren mich stark.
 
-Ich arbeite gern mit Menschen zusammen.
+>Ich arbeite gern mit Menschen zusammen.
 
-🛠️ Ingenieurwissenschaften
+>🛠️ Ingenieurwissenschaften
 
-Ich löse gern technische oder praktische Probleme.
+>Ich löse gern technische oder praktische Probleme.
 
-Ich mag Mathe, Physik oder technisches Verständnis.
+>Ich mag Mathe, Physik oder technisches Verständnis.
 
-Ich baue, tüftle oder verbessere gern Dinge.
+>Ich baue, tüftle oder verbessere gern Dinge.
 
-🎨 Kunst, Musik, Design
+>🎨 Kunst, Musik, Design
 
-Kreatives Gestalten (zeichnen, Musik, Design etc.) liegt mir.
+>Kreatives Gestalten (zeichnen, Musik, Design etc.) liegt mir.
 
-Ich habe ein gutes Gespür für Ästhetik.
+>Ich habe ein gutes Gespür für Ästhetik.
 
-Ich möchte eigene Werke oder Ideen erschaffen.
+>Ich möchte eigene Werke oder Ideen erschaffen.
 
-🔬 Mathematik & Naturwissenschaften
+>🔬 Mathematik & Naturwissenschaften
 
-Ich denke gern logisch und strukturiert.
+>Ich denke gern logisch und strukturiert.
 
-Mathe, Biologie, Chemie oder Physik interessieren mich sehr.
+>Mathe, Biologie, Chemie oder Physik interessieren mich sehr.
 
-Ich experimentiere und forsche gern.
+>Ich experimentiere und forsche gern.
 
-🩺 Medizin & Gesundheitswissenschaften
+>🩺 Medizin & Gesundheitswissenschaften
 
-Ich möchte Menschen gesundheitlich helfen.
+>Ich möchte Menschen gesundheitlich helfen.
 
-Ich kann Verantwortung und Stress gut tragen.
+>Ich kann Verantwortung und Stress gut tragen.
 
-Biologie und Körperfunktionen interessieren mich.
+>Biologie und Körperfunktionen interessieren mich.
 
-📚 Sprach- & Kulturwissenschaften
+>📚 Sprach- & Kulturwissenschaften
 
-Ich lese, schreibe oder analysiere gern Texte.
+>Ich lese, schreibe oder analysiere gern Texte.
 
-Ich interessiere mich für Sprachen, Literatur oder Geschichte.
+>Ich interessiere mich für Sprachen, Literatur oder Geschichte.
 
-Ich beschäftige mich gern mit kulturellen Themen.
+>Ich beschäftige mich gern mit kulturellen Themen.
 
-💼 Wirtschafts- & Rechtswissenschaften
+>💼 Wirtschafts- & Rechtswissenschaften
 
-Ich denke wirtschaftlich oder juristisch-strukturiert.
+>Ich denke wirtschaftlich oder juristisch-strukturiert.
 
-Märkte, Unternehmen oder Recht interessieren mich.
+>Märkte, Unternehmen oder Recht interessieren mich.
 
-Ich argumentiere gern logisch und finde Regeln spannend.
+>Ich argumentiere gern logisch und finde Regeln spannend.
 
-🍎 Lehramt
+>🍎 Lehramt
 
-Ich arbeite gern mit Kindern oder Jugendlichen.
+>Ich arbeite gern mit Kindern oder Jugendlichen.
 
-Ich erkläre gern Dinge und vermittle Wissen.
+>Ich erkläre gern Dinge und vermittle Wissen.
 
-Ich habe Geduld und ein gutes Einfühlungsvermögen.
+>Ich habe Geduld und ein gutes Einfühlungsvermögen.
 
-🏛️ Öffentliche Verwaltung
+>🏛️ Öffentliche Verwaltung
 
-Ich arbeite gern strukturiert, organisiert und regelorientiert.
+>Ich arbeite gern strukturiert, organisiert und regelorientiert.
 
-Politik und staatliche Abläufe interessieren mich.
+>Politik und staatliche Abläufe interessieren mich.
 
-Sicherheit und Stabilität im Beruf sind mir wichtig.
+>Sicherheit und Stabilität im Beruf sind mir wichtig.
