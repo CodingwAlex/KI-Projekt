@@ -11,20 +11,13 @@ public class FFN {
     private final double[][] a; // Aktivierungen: a[l][i]
     private final double[][] z; // Nettoeing�nge: z[l][i]
     private final double[][] delta;
-
-    private final String hiddenActivation;
-    private final String outputActivation;
-    private final String taskType;
     private final Random rand;
 
-    public FFN(int[] layerSizes, String hiddenActivation, String outputActivation, String taskType, long seed) {
+    public FFN(int[] layerSizes, long seed) {
 
         this.layerSizes = layerSizes;
         this.numLayers = layerSizes.length;
 
-        this.hiddenActivation = hiddenActivation;
-        this.outputActivation = outputActivation;
-        this.taskType = taskType;
         this.rand = new Random(seed);
 
         W = new double[numLayers][][];
@@ -102,7 +95,7 @@ public class FFN {
             delta[L][j] = gradOut[j];
         }
 
-        // Delta f�r Hidden-Schichten
+        // Delta for Hidden-Schichten
         for (int l = L - 1; l > 0; l--) {
             for (int i = 0; i < layerSizes[l]; i++) {
                 double sum = 0.0;
@@ -126,7 +119,7 @@ public class FFN {
             }
         }
     }
-    private void sumForBatch(double[][][]gradientW, double[][]gradientB, int featuresSize) {
+    /*private void sumForBatch(double[][][]gradientW, double[][]gradientB, int featuresSize) {
         for(int i=0;i<featuresSize;i++) {
             for(int l = 1; l < numLayers; l++) {
                 for(int j = 0; j < layerSizes[l]; j++) {
@@ -148,7 +141,7 @@ public class FFN {
                 }
             }
         }
-    }
+    }*/
 
 
 
@@ -162,45 +155,14 @@ public class FFN {
         System.out.println("AnzEpochen : " + anzEpochen);
 
         int epoche = 1;
-        int batchSize=2;
-        while (epoche <= anzEpochen) {
-            int[] reihenfolge = NNMath.generatePermutation(features.length, rand);
-            double[][][]gradientW = new double[numLayers][][];
-            double[][]gradientB = new double[numLayers][];
-            for (int l = 1; l < numLayers; l++) {
-                gradientW[l] = new double[layerSizes[l]][layerSizes[l - 1]];
-                gradientB[l] = new double[layerSizes[l]];
+        while (epoche < anzEpochen) {
+            int[]reihenFolge=NNMath.generatePermutation(features.length, rand);
+            for(int i=0; i<reihenFolge.length; i++){
+                forward(features[i]);
+                backward(labels[i], lossFunction);
+                updateWeightsStochastic(learningRate);
             }
-            //Batch Gradient
-			/*for (int idx = 0; idx < features.length; idx++) {
-				int i = reihenfolge[idx];
-				forward(features[i]);
-				backward(labels[i], lossFunction);
-				sumForBatch(gradientW, gradientB, features.length);
-				updateWeightsStochastic(alpha);
-			}
-			updateWeightsBatchGradient(alpha, gradientW, gradientB, features.length);*/
-
-            //MiniBatch
-            for (int idx = 0; idx < features.length; idx+=batchSize) {
-                for (int l = 1; l < numLayers; l++) {
-                    gradientW[l] = new double[layerSizes[l]][layerSizes[l - 1]];
-                    gradientB[l] = new double[layerSizes[l]];
-                }
-
-                int actualBatchSize = Math.min(batchSize, features.length - batchSize);
-                for(int b=0; b<actualBatchSize; b++) {
-                    int i=reihenfolge[idx+b];
-                    forward(features[i]);
-                    backward(labels[i], lossFunction);
-                    sumForBatch(gradientW, gradientB, actualBatchSize);
-                }
-                updateWeightsBatchGradient(learningRate, gradientW, gradientB, actualBatchSize);
-                //updateWeightsStochastic(alpha);
-            }
-            alpha = alpha - deltaAlpha;
             epoche++;
-
             validate(features, labels);
         }
         System.out.println("Training abgeschlossen");
