@@ -54,11 +54,12 @@ public class FragenGUI extends JFrame {
             "Sicherheit und Stabilität sind mir wichtig."
     };
 
-     int[] ergebnisse = new int[fragen.length];
+    int[] ergebnisse = new int[fragen.length];
     private int aktuelleFrage = 0;
 
     private JTextArea frageText;
-    private JSpinner bewertungSpinner;
+    private JPanel radioPanel;
+    private ButtonGroup buttonGroup;
     private JButton weiterButton;
     private JLabel fortschrittLabel;
 
@@ -78,20 +79,27 @@ public class FragenGUI extends JFrame {
         frageText.setMargin(new Insets(20, 20, 20, 20));
         add(frageText, BorderLayout.CENTER);
 
-        // Unten-Panel für Bewertung + Button + Fortschritt
+        // Unten-Panel
         JPanel untenPanel = new JPanel(new BorderLayout());
 
-        JPanel bewertungPanel = new JPanel();
-        bewertungPanel.add(new JLabel("Bewertung (1–10): "));
-        bewertungSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1));
-        bewertungPanel.add(bewertungSpinner);
+        // Radio Buttons 1-10
+        radioPanel = new JPanel();
+        radioPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        buttonGroup = new ButtonGroup();
+        for (int i = 1; i <= 10; i++) {
+            JRadioButton rb = new JRadioButton(String.valueOf(i));
+            rb.setActionCommand(String.valueOf(i));
+            buttonGroup.add(rb);
+            radioPanel.add(rb);
+        }
+        untenPanel.add(radioPanel, BorderLayout.WEST);
 
-        untenPanel.add(bewertungPanel, BorderLayout.WEST);
-
+        // Weiter-Button
         weiterButton = new JButton("Weiter");
         weiterButton.addActionListener(e -> weiter());
         untenPanel.add(weiterButton, BorderLayout.EAST);
 
+        // Fortschrittsanzeige
         fortschrittLabel = new JLabel("", SwingConstants.CENTER);
         fortschrittLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         untenPanel.add(fortschrittLabel, BorderLayout.CENTER);
@@ -104,8 +112,19 @@ public class FragenGUI extends JFrame {
 
     private void frageAktualisieren() {
         frageText.setText((aktuelleFrage + 1) + ". Frage:\n\n" + fragen[aktuelleFrage]);
-        bewertungSpinner.setValue(ergebnisse[aktuelleFrage] == 0 ? 5 : ergebnisse[aktuelleFrage]);
         fortschrittLabel.setText("Frage " + (aktuelleFrage + 1) + " von " + fragen.length);
+
+        // ButtonGroup zurücksetzen
+        buttonGroup.clearSelection();
+        if (ergebnisse[aktuelleFrage] != 0) {
+            // vorherige Auswahl setzen
+            for (AbstractButton button : java.util.Collections.list(buttonGroup.getElements())) {
+                if (Integer.parseInt(button.getActionCommand()) == ergebnisse[aktuelleFrage]) {
+                    button.setSelected(true);
+                    break;
+                }
+            }
+        }
 
         if (aktuelleFrage == fragen.length - 1) {
             weiterButton.setText("Fertig");
@@ -115,7 +134,13 @@ public class FragenGUI extends JFrame {
     }
 
     private void weiter() {
-        ergebnisse[aktuelleFrage] = (int) bewertungSpinner.getValue();
+        // Ausgewählten Wert speichern
+        ButtonModel selected = buttonGroup.getSelection();
+        if (selected == null) {
+            JOptionPane.showMessageDialog(this, "Bitte wählen Sie eine Bewertung von 1 bis 10 aus!");
+            return;
+        }
+        ergebnisse[aktuelleFrage] = Integer.parseInt(selected.getActionCommand());
 
         if (aktuelleFrage < fragen.length - 1) {
             aktuelleFrage++;
