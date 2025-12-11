@@ -3,9 +3,6 @@ import java.awt.*;
 
 public class FragenGUI extends JFrame {
 
-    private final JSpinner[] spinnerFelder;
-    private final int[] ergebnisse;
-
     private final String[] fragen = {
             "🌿 Agrar- & Forstwissenschaften\n" +
                     "Ich arbeite gern draußen in der Natur.\n" +
@@ -58,71 +55,76 @@ public class FragenGUI extends JFrame {
                     "Sicherheit und Stabilität sind mir wichtig."
     };
 
+    int[] ergebnisse = new int[fragen.length];
+    private int aktuelleFrage = 0;
+
+    private JTextArea frageText;
+    private JSpinner bewertungSpinner;
+    private JButton weiterButton;
+
     public FragenGUI() {
-        setTitle("Selbsteinschätzung – 1 bis 10");
+        setTitle("Selbsteinschätzung");
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 800);
         setLayout(new BorderLayout());
 
-        spinnerFelder = new JSpinner[fragen.length];
-        ergebnisse = new int[fragen.length];
+        // Frage-Textfeld
+        frageText = new JTextArea();
+        frageText.setEditable(false);
+        frageText.setLineWrap(true);
+        frageText.setWrapStyleWord(true);
+        frageText.setFont(new Font("Arial", Font.PLAIN, 16));
+        frageText.setBackground(new Color(250, 250, 250));
+        frageText.setMargin(new Insets(20, 20, 20, 20));
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        add(frageText, BorderLayout.CENTER);
 
-        // Panels für jede Frage
-        for (int i = 0; i < fragen.length; i++) {
-            JPanel fragePanel = new JPanel(new BorderLayout());
-            fragePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
-            fragePanel.setBackground(new Color(245, 245, 245));
-            fragePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 180));
+        // Bewertung unten
+        JPanel untenPanel = new JPanel();
+        untenPanel.add(new JLabel("Bewertung (1–10):"));
 
-            JTextArea text = new JTextArea(fragen[i]);
-            text.setFont(new Font("Arial", Font.PLAIN, 14));
-            text.setEditable(false);
-            text.setLineWrap(true);
-            text.setWrapStyleWord(true);
-            text.setBackground(new Color(245, 245, 245));
-            text.setBorder(null);
+        bewertungSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1));
+        untenPanel.add(bewertungSpinner);
 
-            JPanel bewertungPanel = new JPanel();
-            bewertungPanel.add(new JLabel("Bewertung (1–10): "));
-            spinnerFelder[i] = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1));
-            bewertungPanel.add(spinnerFelder[i]);
+        weiterButton = new JButton("Weiter");
+        weiterButton.addActionListener(e -> weiter());
+        untenPanel.add(weiterButton);
 
-            fragePanel.add(text, BorderLayout.CENTER);
-            fragePanel.add(bewertungPanel, BorderLayout.SOUTH);
-            panel.add(fragePanel);
-        }
+        add(untenPanel, BorderLayout.SOUTH);
 
-        JScrollPane scrollPane = new JScrollPane(panel);
-        add(scrollPane, BorderLayout.CENTER);
-
-        JButton btnSpeichern = new JButton("Ergebnisse speichern");
-        btnSpeichern.setFont(new Font("Arial", Font.BOLD, 16));
-        btnSpeichern.addActionListener(e -> speichern());
-        add(btnSpeichern, BorderLayout.SOUTH);
-
+        frageAktualisieren();
         setVisible(true);
     }
 
-    private void speichern() {
-        for (int i = 0; i < spinnerFelder.length; i++) {
-            ergebnisse[i] = (int) spinnerFelder[i].getValue();
-        }
+    private void frageAktualisieren() {
+        frageText.setText((aktuelleFrage + 1) + ". Frage:\n\n" + fragen[aktuelleFrage]);
+        bewertungSpinner.setValue(ergebnisse[aktuelleFrage] == 0 ? 5 : ergebnisse[aktuelleFrage]);
 
+        if (aktuelleFrage == fragen.length - 1) {
+            weiterButton.setText("Fertig");
+        }
+    }
+
+    private void weiter() {
+        ergebnisse[aktuelleFrage] = (int) bewertungSpinner.getValue();
+
+        if (aktuelleFrage < fragen.length - 1) {
+            aktuelleFrage++;
+            frageAktualisieren();
+        } else {
+            speichern();
+        }
+    }
+
+    private void speichern() {
         System.out.println("Ergebnisse:");
         for (int wert : ergebnisse) {
             System.out.print(wert + " ");
         }
         System.out.println();
 
-        JOptionPane.showMessageDialog(this, "Ergebnisse wurden gespeichert!");
-    }
-
-    public int[] getErgebnisse() {
-        return ergebnisse;
+        JOptionPane.showMessageDialog(this, "Alle Antworten wurden gespeichert!");
+        dispose(); // Fenster schließen
     }
 
     public static void main(String[] args) {
