@@ -2,8 +2,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
-
+    
     public static void main(String[] args) {
+        FragenGUI gui = new FragenGUI();
+        int[] antworten = gui.ergebnisse; 
         try {
             double[][] data = Einlesen.einlesenXY(new File("KI-Projekt\\ki\\data\\data.csv"));
             double[][] trainFeatures=Einlesen.getFeatures(data);

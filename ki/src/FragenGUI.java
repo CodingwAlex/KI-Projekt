@@ -1,10 +1,10 @@
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class FragenGUI extends JFrame {
 
     private final JSpinner[] spinnerFelder = new JSpinner[30];
-    private final int[] ergebnisse = new int[30];
+    int[] ergebnisse = new int[30];
 
     public FragenGUI() {
         setTitle("Fragebogen – 30 Fragen (1–10)");
