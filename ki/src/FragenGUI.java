@@ -3,122 +3,144 @@ import javax.swing.*;
 
 public class FragenGUI extends JFrame {
 
+<<<<<<< HEAD
     private final JSpinner[] spinnerFelder;
     int[] ergebnisse;
 
+=======
+>>>>>>> bbc851ee1c7ad18f45fca8b2f882360122483540
     private final String[] fragen = {
-            "🌿 Agrar- & Forstwissenschaften\n" +
-                    "Ich arbeite gern draußen in der Natur.\n" +
-                    "Nachhaltigkeit, Ökosysteme und Umwelt interessieren mich sehr.\n" +
-                    "Ich kann mir Labor- oder Feldarbeit vorstellen.",
+            // 🌿 Agrar- & Forstwissenschaften
+            "Ich arbeite gern draußen in der Natur.",
+            "Nachhaltigkeit, Ökosysteme und Umwelt interessieren mich sehr.",
+            "Ich kann mir Labor- oder Feldarbeit vorstellen.",
 
-            "🧑‍🤝‍🧑 Gesellschafts- & Sozialwissenschaften\n" +
-                    "Ich analysiere gern menschliches Verhalten und soziale Strukturen.\n" +
-                    "Politik, Gesellschaft und Kultur interessieren mich stark.\n" +
-                    "Ich arbeite gern mit Menschen zusammen.",
+            // 🧑‍🤝‍🧑 Gesellschafts- & Sozialwissenschaften
+            "Ich analysiere gern menschliches Verhalten und soziale Strukturen.",
+            "Politik, Gesellschaft und Kultur interessieren mich stark.",
+            "Ich arbeite gern mit Menschen zusammen.",
 
-            "🛠️ Ingenieurwissenschaften\n" +
-                    "Ich löse gern technische oder praktische Probleme.\n" +
-                    "Ich mag Mathe, Physik oder technisches Verständnis.\n" +
-                    "Ich baue, tüftle oder verbessere gern Dinge.",
+            // 🛠️ Ingenieurwissenschaften
+            "Ich löse gern technische oder praktische Probleme.",
+            "Ich mag Mathe, Physik oder technisches Verständnis.",
+            "Ich baue, tüftle oder verbessere gern Dinge.",
 
-            "🎨 Kunst, Musik, Design\n" +
-                    "Kreatives Gestalten liegt mir.\n" +
-                    "Ich habe ein gutes Gespür für Ästhetik.\n" +
-                    "Ich möchte eigene Werke oder Ideen erschaffen.",
+            // 🎨 Kunst, Musik, Design
+            "Kreatives Gestalten liegt mir.",
+            "Ich habe ein gutes Gespür für Ästhetik.",
+            "Ich möchte eigene Werke oder Ideen erschaffen.",
 
-            "🔬 Mathematik & Naturwissenschaften\n" +
-                    "Ich denke gern logisch und strukturiert.\n" +
-                    "Mathe, Biologie, Chemie oder Physik interessieren mich sehr.\n" +
-                    "Ich experimentiere und forsche gern.",
+            // 🔬 Mathematik & Naturwissenschaften
+            "Ich denke gern logisch und strukturiert.",
+            "Mathe, Biologie, Chemie oder Physik interessieren mich sehr.",
+            "Ich experimentiere und forsche gern.",
 
-            "🩺 Medizin & Gesundheitswissenschaften\n" +
-                    "Ich möchte Menschen gesundheitlich helfen.\n" +
-                    "Ich kann Verantwortung und Stress gut tragen.\n" +
-                    "Biologie und Körperfunktionen interessieren mich.",
+            // 🩺 Medizin & Gesundheitswissenschaften
+            "Ich möchte Menschen gesundheitlich helfen.",
+            "Ich kann Verantwortung und Stress gut tragen.",
+            "Biologie und Körperfunktionen interessieren mich.",
 
-            "📚 Sprach- & Kulturwissenschaften\n" +
-                    "Ich lese, schreibe oder analysiere gern Texte.\n" +
-                    "Ich interessiere mich für Sprachen, Literatur oder Geschichte.\n" +
-                    "Ich beschäftige mich gern mit kulturellen Themen.",
+            // 📚 Sprach- & Kulturwissenschaften
+            "Ich lese, schreibe oder analysiere gern Texte.",
+            "Ich interessiere mich für Sprachen, Literatur oder Geschichte.",
+            "Ich beschäftige mich gern mit kulturellen Themen.",
 
-            "💼 Wirtschafts- & Rechtswissenschaften\n" +
-                    "Ich denke wirtschaftlich oder juristisch-strukturiert.\n" +
-                    "Märkte, Unternehmen oder Recht interessieren mich.\n" +
-                    "Ich argumentiere gern logisch und finde Regeln spannend.",
+            // 💼 Wirtschafts- & Rechtswissenschaften
+            "Ich denke wirtschaftlich oder juristisch-strukturiert.",
+            "Märkte, Unternehmen oder Recht interessieren mich.",
+            "Ich argumentiere gern logisch und finde Regeln spannend.",
 
-            "🍎 Lehramt\n" +
-                    "Ich arbeite gern mit Kindern oder Jugendlichen.\n" +
-                    "Ich erkläre gern Dinge und vermittle Wissen.\n" +
-                    "Ich habe Geduld und Einfühlungsvermögen.",
+            // 🍎 Lehramt
+            "Ich arbeite gern mit Kindern oder Jugendlichen.",
+            "Ich erkläre gern Dinge und vermittle Wissen.",
+            "Ich habe Geduld und Einfühlungsvermögen.",
 
-            "🏛️ Öffentliche Verwaltung\n" +
-                    "Ich arbeite gern strukturiert, organisiert und regelorientiert.\n" +
-                    "Politik und staatliche Abläufe interessieren mich.\n" +
-                    "Sicherheit und Stabilität sind mir wichtig."
+            // 🏛️ Öffentliche Verwaltung
+            "Ich arbeite gern strukturiert, organisiert und regelorientiert.",
+            "Politik und staatliche Abläufe interessieren mich.",
+            "Sicherheit und Stabilität sind mir wichtig."
     };
+
+     int[] ergebnisse = new int[fragen.length];
+    private int aktuelleFrage = 0;
+
+    private JTextArea frageText;
+    private JSpinner bewertungSpinner;
+    private JButton weiterButton;
+    private JLabel fortschrittLabel;
 
     public FragenGUI() {
         setTitle("Selbsteinschätzung – 1 bis 10");
+        setSize(600, 350);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 800);
         setLayout(new BorderLayout());
 
-        spinnerFelder = new JSpinner[fragen.length];
-        ergebnisse = new int[fragen.length];
+        // Frage-Textfeld
+        frageText = new JTextArea();
+        frageText.setEditable(false);
+        frageText.setLineWrap(true);
+        frageText.setWrapStyleWord(true);
+        frageText.setFont(new Font("Arial", Font.PLAIN, 16));
+        frageText.setBackground(new Color(250, 250, 250));
+        frageText.setMargin(new Insets(20, 20, 20, 20));
+        add(frageText, BorderLayout.CENTER);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // Unten-Panel für Bewertung + Button + Fortschritt
+        JPanel untenPanel = new JPanel(new BorderLayout());
 
-        // Panels für jede Frage
-        for (int i = 0; i < fragen.length; i++) {
-            JPanel fragePanel = new JPanel(new BorderLayout());
-            fragePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 20, 10));
-            fragePanel.setBackground(new Color(245, 245, 245));
-            fragePanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 180));
+        JPanel bewertungPanel = new JPanel();
+        bewertungPanel.add(new JLabel("Bewertung (1–10): "));
+        bewertungSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1));
+        bewertungPanel.add(bewertungSpinner);
 
-            JTextArea text = new JTextArea(fragen[i]);
-            text.setFont(new Font("Arial", Font.PLAIN, 14));
-            text.setEditable(false);
-            text.setLineWrap(true);
-            text.setWrapStyleWord(true);
-            text.setBackground(new Color(245, 245, 245));
-            text.setBorder(null);
+        untenPanel.add(bewertungPanel, BorderLayout.WEST);
 
-            JPanel bewertungPanel = new JPanel();
-            bewertungPanel.add(new JLabel("Bewertung (1–10): "));
-            spinnerFelder[i] = new JSpinner(new SpinnerNumberModel(5, 1, 10, 1));
-            bewertungPanel.add(spinnerFelder[i]);
+        weiterButton = new JButton("Weiter");
+        weiterButton.addActionListener(e -> weiter());
+        untenPanel.add(weiterButton, BorderLayout.EAST);
 
-            fragePanel.add(text, BorderLayout.CENTER);
-            fragePanel.add(bewertungPanel, BorderLayout.SOUTH);
-            panel.add(fragePanel);
-        }
+        fortschrittLabel = new JLabel("", SwingConstants.CENTER);
+        fortschrittLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        untenPanel.add(fortschrittLabel, BorderLayout.CENTER);
 
-        JScrollPane scrollPane = new JScrollPane(panel);
-        add(scrollPane, BorderLayout.CENTER);
+        add(untenPanel, BorderLayout.SOUTH);
 
-        JButton btnSpeichern = new JButton("Ergebnisse speichern");
-        btnSpeichern.setFont(new Font("Arial", Font.BOLD, 16));
-        btnSpeichern.addActionListener(e -> speichern());
-        add(btnSpeichern, BorderLayout.SOUTH);
-
+        frageAktualisieren();
         setVisible(true);
     }
 
-    private void speichern() {
-        for (int i = 0; i < spinnerFelder.length; i++) {
-            ergebnisse[i] = (int) spinnerFelder[i].getValue();
-        }
+    private void frageAktualisieren() {
+        frageText.setText((aktuelleFrage + 1) + ". Frage:\n\n" + fragen[aktuelleFrage]);
+        bewertungSpinner.setValue(ergebnisse[aktuelleFrage] == 0 ? 5 : ergebnisse[aktuelleFrage]);
+        fortschrittLabel.setText("Frage " + (aktuelleFrage + 1) + " von " + fragen.length);
 
+        if (aktuelleFrage == fragen.length - 1) {
+            weiterButton.setText("Fertig");
+        } else {
+            weiterButton.setText("Weiter");
+        }
+    }
+
+    private void weiter() {
+        ergebnisse[aktuelleFrage] = (int) bewertungSpinner.getValue();
+
+        if (aktuelleFrage < fragen.length - 1) {
+            aktuelleFrage++;
+            frageAktualisieren();
+        } else {
+            speichern();
+        }
+    }
+
+    private void speichern() {
         System.out.println("Ergebnisse:");
         for (int wert : ergebnisse) {
             System.out.print(wert + " ");
         }
         System.out.println();
 
-        JOptionPane.showMessageDialog(this, "Ergebnisse wurden gespeichert!");
+        JOptionPane.showMessageDialog(this, "Alle Antworten wurden gespeichert!");
+        dispose(); // Fenster schließen
     }
 
     public int[] getErgebnisse() {
