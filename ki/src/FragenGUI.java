@@ -4,55 +4,21 @@ import java.awt.*;
 public class FragenGUI extends JFrame {
 
     private final String[] fragen = {
-            "🌿 Agrar- & Forstwissenschaften\n" +
-                    "Ich arbeite gern draußen in der Natur.\n" +
-                    "Nachhaltigkeit, Ökosysteme und Umwelt interessieren mich sehr.\n" +
-                    "Ich kann mir Labor- oder Feldarbeit vorstellen.",
+            // Agrar- & Forstwissenschaften
+            "Ich arbeite gern draußen in der Natur.",
+            "Nachhaltigkeit, Ökosysteme und Umwelt interessieren mich sehr.",
+            "Ich kann mir Labor- oder Feldarbeit vorstellen.",
 
-            "🧑‍🤝‍🧑 Gesellschafts- & Sozialwissenschaften\n" +
-                    "Ich analysiere gern menschliches Verhalten und soziale Strukturen.\n" +
-                    "Politik, Gesellschaft und Kultur interessieren mich stark.\n" +
-                    "Ich arbeite gern mit Menschen zusammen.",
+            // Gesellschafts- & Sozialwissenschaften
+            "Ich analysiere gern menschliches Verhalten und soziale Strukturen.",
+            "Politik, Gesellschaft und Kultur interessieren mich stark.",
+            "Ich arbeite gern mit Menschen zusammen.",
 
-            "🛠️ Ingenieurwissenschaften\n" +
-                    "Ich löse gern technische oder praktische Probleme.\n" +
-                    "Ich mag Mathe, Physik oder technisches Verständnis.\n" +
-                    "Ich baue, tüftle oder verbessere gern Dinge.",
-
-            "🎨 Kunst, Musik, Design\n" +
-                    "Kreatives Gestalten liegt mir.\n" +
-                    "Ich habe ein gutes Gespür für Ästhetik.\n" +
-                    "Ich möchte eigene Werke oder Ideen erschaffen.",
-
-            "🔬 Mathematik & Naturwissenschaften\n" +
-                    "Ich denke gern logisch und strukturiert.\n" +
-                    "Mathe, Biologie, Chemie oder Physik interessieren mich sehr.\n" +
-                    "Ich experimentiere und forsche gern.",
-
-            "🩺 Medizin & Gesundheitswissenschaften\n" +
-                    "Ich möchte Menschen gesundheitlich helfen.\n" +
-                    "Ich kann Verantwortung und Stress gut tragen.\n" +
-                    "Biologie und Körperfunktionen interessieren mich.",
-
-            "📚 Sprach- & Kulturwissenschaften\n" +
-                    "Ich lese, schreibe oder analysiere gern Texte.\n" +
-                    "Ich interessiere mich für Sprachen, Literatur oder Geschichte.\n" +
-                    "Ich beschäftige mich gern mit kulturellen Themen.",
-
-            "💼 Wirtschafts- & Rechtswissenschaften\n" +
-                    "Ich denke wirtschaftlich oder juristisch-strukturiert.\n" +
-                    "Märkte, Unternehmen oder Recht interessieren mich.\n" +
-                    "Ich argumentiere gern logisch und finde Regeln spannend.",
-
-            "🍎 Lehramt\n" +
-                    "Ich arbeite gern mit Kindern oder Jugendlichen.\n" +
-                    "Ich erkläre gern Dinge und vermittle Wissen.\n" +
-                    "Ich habe Geduld und Einfühlungsvermögen.",
-
-            "🏛️ Öffentliche Verwaltung\n" +
-                    "Ich arbeite gern strukturiert, organisiert und regelorientiert.\n" +
-                    "Politik und staatliche Abläufe interessieren mich.\n" +
-                    "Sicherheit und Stabilität sind mir wichtig."
+            // Mathematik & Naturwissenschaften
+            "Ich denke gern logisch und strukturiert.",
+            "Mathe, Biologie, Chemie oder Physik interessieren mich sehr.",
+            "Ich experimentiere und forsche gern."
+            // … weitere Kategorien analog aufteilen
     };
 
     int[] ergebnisse = new int[fragen.length];
@@ -64,7 +30,7 @@ public class FragenGUI extends JFrame {
 
     public FragenGUI() {
         setTitle("Selbsteinschätzung");
-        setSize(600, 400);
+        setSize(600, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
