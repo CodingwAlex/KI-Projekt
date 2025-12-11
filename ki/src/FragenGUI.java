@@ -1,10 +1,10 @@
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class FragenGUI extends JFrame {
 
     private final JSpinner[] spinnerFelder;
-    private final int[] ergebnisse;
+    int[] ergebnisse;
 
     private final String[] fragen = {
             "🌿 Agrar- & Forstwissenschaften\n" +
