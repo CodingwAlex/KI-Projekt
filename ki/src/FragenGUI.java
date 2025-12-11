@@ -2,13 +2,6 @@ import java.awt.*;
 import javax.swing.*;
 
 public class FragenGUI extends JFrame {
-
-<<<<<<< HEAD
-    private final JSpinner[] spinnerFelder;
-    int[] ergebnisse;
-
-=======
->>>>>>> bbc851ee1c7ad18f45fca8b2f882360122483540
     private final String[] fragen = {
             // 🌿 Agrar- & Forstwissenschaften
             "Ich arbeite gern draußen in der Natur.",
