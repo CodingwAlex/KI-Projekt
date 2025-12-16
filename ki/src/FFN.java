@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class FFN {
 
-    private final int numLayers;
+    private int numLayers;
     private final int[] layerSizes;
 
     private final double[][][] W; // Gewichte: W[l][j][i]
@@ -47,6 +47,10 @@ public class FFN {
 
         initWeights();
 
+    }
+
+    public void setLayerSize(int[]layerSizes){
+        this.numLayers = layerSizes.length;
     }
 
     private void initWeights() {
@@ -119,39 +123,11 @@ public class FFN {
             }
         }
     }
-    /*private void sumForBatch(double[][][]gradientW, double[][]gradientB, int featuresSize) {
-        for(int i=0;i<featuresSize;i++) {
-            for(int l = 1; l < numLayers; l++) {
-                for(int j = 0; j < layerSizes[l]; j++) {
-                    gradientB[l][j]+=delta[l][j];
-                    for(int k=0;k<layerSizes[l - 1];k++){
-                        gradientW[l][j][k]+=delta[l][j]*a[l-1][k];
-                    }
-                }
-            }
-        }
-    }
-
-    public void updateWeightsBatchGradient(double learningRate, double [][][]gradientW, double[][]gradientB, int dataSize) {
-        for (int l = 1; l < numLayers; l++) {
-            for (int j = 0; j < layerSizes[l]; j++) {
-                b[l][j] -= learningRate * (gradientB[l][j]/dataSize);
-                for (int i = 0; i < layerSizes[l - 1]; i++) {
-                    W[l][j][i]-=learningRate * (gradientW[l][j][i]/dataSize);
-                }
-            }
-        }
-    }*/
-
-
 
     public void train(double[][] features, double[][] labels, int anzEpochen, double learningRate,
                       BinaryCrossEntropy lossFunction) {
 
-        double alpha = learningRate;
-        double deltaAlpha = alpha / anzEpochen;
-
-        System.out.println("Start Alpha: " + alpha);
+        System.out.println("Start Alpha: " + learningRate);
         System.out.println("AnzEpochen : " + anzEpochen);
 
         int epoche = 1;

@@ -1,11 +1,16 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Einlesen {
+
+    //for training of user data(ranges of training data)
+    private static final List<Double> ranges = new ArrayList<>();
 
     public static double[][] einlesenXY(File datei) throws IOException {
         List<double[]> datenListe = new ArrayList<>();
@@ -70,9 +75,16 @@ public class Einlesen {
         return features;
     }
 
-    private static void minMaxScaler(double[][] features) {
+    public static void minMaxScaler(double[][] features) {
         int zeilen = features.length;
         int spalten = features[0].length;
+
+        if(zeilen == 1){
+            for (int i = 0; i < spalten; i++) {
+                features[0][i] = features[0][i] / ranges.get(i);
+            }
+            return;
+        }
 
         for (int j = 0; j < spalten; j++) {
             double min = Double.POSITIVE_INFINITY;
@@ -82,14 +94,37 @@ public class Einlesen {
                 if (features[i][j] < min) min = features[i][j];
                 if (features[i][j] > max) max = features[i][j];
             }
-
             double range = max - min;
             if (range == 0) range = 1;
-
+            ranges.add(range);
             for (int i = 0; i < zeilen; i++) {
                 features[i][j] = (features[i][j] - min) / range;
             }
         }
     }
 
+    public static void answers(double [][]data){
+        Scanner in = new Scanner(System.in);
+        Path path= Paths.get("KI-Projekt\\ki\\data\\questions.txt");
+        System.out.println("For the following questions, answer from 1 to 10, where 1 means \"that's not me\" and 10 means \"that's me\".");
+        try(BufferedReader reader = Files.newBufferedReader(path)) {
+            List<String> questions = new ArrayList<>();
+            reader.lines().forEach(questions::add);
+            for(int i=0;i<questions.size();){
+                System.out.println(questions.get(i));
+                try{
+                    double answer=in.nextDouble();
+                    if(answer>10 || answer<0)
+                        throw new InputMismatchException();
+                    data[0][i]=answer;
+                    i++;
+                } catch (InputMismatchException e) {
+                    System.out.println("Enter value from 1 to 10");
+                    in.nextLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

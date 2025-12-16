@@ -13,8 +13,10 @@ public class Main {
             BinaryCrossEntropy entropy=new BinaryCrossEntropy();
             netz.train(trainFeatures,trainLabels,300,0.5,entropy);
 
-            System.out.println("\n=== Ergebnisse für alle Samples ===");
-
+            double[][]answers=new double[1][31];
+            Einlesen.answers(answers);
+            answers[0][30]=0;
+            trainFeatures=Einlesen.getFeatures(answers);
             for (int i = 0; i < trainFeatures.length; i++) {
 
                 double[] prediction = netz.forward(trainFeatures[i]);
@@ -28,10 +30,9 @@ public class Main {
                 System.out.print("]");
 
                 System.out.printf(
-                        "  --> Vorhersage: %.4f (%d) | Label: %d%n",
+                        "  --> Vorhersage: %.4f (%d)",
                         prediction[0],
-                        predictedClass,
-                        (int) trainLabels[i][0]
+                        predictedClass
                 );
             }
 
