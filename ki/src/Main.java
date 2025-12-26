@@ -7,33 +7,39 @@ public class Main {
         try {
             double[][] data = Einlesen.einlesenXY(new File("KI-Projekt\\ki\\data\\data.csv"));
             double[][] trainFeatures=Einlesen.getFeatures(data);
-            double[][] trainLabels=Einlesen.getLabels(data);
-            int[] layerSizes={trainFeatures[0].length,100,trainLabels[0].length};
+            double[][] trainLabels=Einlesen.getLabels(data, 10);
+            int[] layerSizes={trainFeatures[0].length,20,trainLabels[0].length};
             FFN netz=new FFN(layerSizes,886L);
-            BinaryCrossEntropy entropy=new BinaryCrossEntropy();
-            netz.train(trainFeatures,trainLabels,300,0.5,entropy);
+            SoftMaxEntropy entropy =new SoftMaxEntropy();
+            netz.train(trainFeatures,trainLabels,100,0.001,entropy);
 
             double[][]answers=new double[1][31];
             Einlesen.answers(answers);
             answers[0][30]=0;
             trainFeatures=Einlesen.getFeatures(answers);
+            String[]stud={"Agrar- und Forshwissenschaften",
+                "Gesellschafts- und Sozialwissenschaften",
+                "Ingenieurwissenschaften",
+                "Kunst, Musik, Design",
+                "Mathematik, Naturwissenschaften",
+                "Medizin, Gesundheitswissenschaften",
+                "Sprach- und Kulturwissenschaften",
+                "Wirtschafts- und Rechtswissenschaften","Lehramt",
+                "Öffentliche Verwaltung"};
             for (int i = 0; i < trainFeatures.length; i++) {
 
                 double[] prediction = netz.forward(trainFeatures[i]);
-                int predictedClass = prediction[0] >= 0.5 ? 1 : 0;
 
-                System.out.print("Antworten Sample " + i + ": [");
-                for (int j = 0; j < trainFeatures[i].length; j++) {
-                    System.out.print((int)(trainFeatures[i][j]*10));
-                    if (j < trainFeatures[i].length - 1) System.out.print(", ");
+                int predictedClass = 0;
+                double maxProb = prediction[0];
+                for (int j = 1; j < prediction.length; j++) {
+                    if (prediction[j] > maxProb) {
+                        maxProb = prediction[j];
+                        predictedClass = j;
+                    }
                 }
-                System.out.print("]");
+                System.out.println("Predicted class: " + stud[predictedClass] + " (prob: " + maxProb + ")");
 
-                System.out.printf(
-                        "  --> Vorhersage: %.4f (%d)",
-                        prediction[0],
-                        predictedClass
-                );
             }
 
 

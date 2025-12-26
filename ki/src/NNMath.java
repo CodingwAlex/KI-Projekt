@@ -25,12 +25,30 @@ public class NNMath {
 
         return result;
     }
-    public static double activate(double x) {
-        return 1.0 / (1.0 + Math.exp(-x));
+
+    public static double hiddenActivation(double x){
+        return Math.max(0.0,x);
+    }
+
+    public static double[] outputActivation(double[] z) {
+        double max = z[0];
+        for (int i = 1; i < z.length; i++) {
+            if (z[i] > max) max = z[i];
+        }
+
+        double sum = 0.0;
+        double[] result = new double[z.length];
+        for (int i = 0; i < z.length; i++) {
+            result[i] = Math.exp(z[i] - max); // numerisch stabil
+            sum += result[i];
+        }
+        for (int i = 0; i < z.length; i++) {
+            result[i] /= sum;
+        }
+        return result;
     }
 
     public static double activateDerivative(double x) {
-        double s = 1.0 / (1.0 + Math.exp(-x));
-        return s * (1.0 - s);
+        return x > 0 ? 1.0 : 0.0;
     }
 }

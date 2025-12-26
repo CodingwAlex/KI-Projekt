@@ -43,18 +43,18 @@ public class Einlesen {
         return datenListe.toArray(new double[0][]);
     }
 
-    public static double[][] getLabels(double[][] daten) {
+    public static double[][] getLabels(double[][] daten, int numClasses) {
         if (daten.length == 0)
             return null;
 
-        double[][] labels = new double[daten.length][1];
+        double[][] labels = new double[daten.length][numClasses];
 
         for (int i = 0; i < daten.length; i++) {
             int label = (int) daten[i][daten[i].length - 1];
-            if (label != 0 && label != 1) {
+            if (label < 0 ||  label > numClasses) {
                 throw new IllegalArgumentException("Label " + label + " ist nicht 0 oder 1");
             }
-            labels[i][0] = label;
+            labels[i][label-1] = 1.0;
         }
 
         return labels;
@@ -114,7 +114,7 @@ public class Einlesen {
                 System.out.println(questions.get(i));
                 try{
                     double answer=in.nextDouble();
-                    if(answer>10 || answer<0)
+                    if(answer>10 || answer<1)
                         throw new InputMismatchException();
                     data[0][i]=answer;
                     i++;

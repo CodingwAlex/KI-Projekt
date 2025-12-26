@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -81,19 +82,26 @@ public class FFN {
                     sum += W[l][j][i] * a[l - 1][i];
                 }
                 z[l][j] = sum;
-                a[l][j] = NNMath.activate(z[l][j]);
+                if(l<numLayers-1)
+                    a[l][j] = NNMath.hiddenActivation(z[l][j]);
             }
         }
-        return a[numLayers - 1];
+
+        int L = numLayers - 1;
+
+        double[] activated = NNMath.outputActivation(z[L]);
+        System.arraycopy(activated, 0, a[L], 0, activated.length);
+
+        return a[L];
     }
 
     // ============================================================
     // BACKWARD PASS
     // ============================================================
-    public void backward(double[] yTrue, BinaryCrossEntropy lossFunction) {
+    public void backward(double[] labels, SoftMaxEntropy lossFunction) {
         int L = numLayers - 1;
 
-        double[] gradOut = lossFunction.gradient(a[L], yTrue); // dL/da
+        double[] gradOut = lossFunction.gradient(a[L], labels); // dL/da
 
         for (int j = 0; j < a[L].length; j++) {
             delta[L][j] = gradOut[j];
@@ -125,7 +133,7 @@ public class FFN {
     }
 
     public void train(double[][] features, double[][] labels, int anzEpochen, double learningRate,
-                      BinaryCrossEntropy lossFunction) {
+                      SoftMaxEntropy lossFunction) {
 
         System.out.println("Start Alpha: " + learningRate);
         System.out.println("AnzEpochen : " + anzEpochen);
@@ -134,8 +142,9 @@ public class FFN {
         while (epoche < anzEpochen) {
             int[]reihenFolge=NNMath.generatePermutation(features.length, rand);
             for(int i=0; i<reihenFolge.length; i++){
-                forward(features[i]);
-                backward(labels[i], lossFunction);
+                int idx=reihenFolge[i];
+                forward(features[idx]);
+                backward(labels[idx], lossFunction);
                 updateWeightsStochastic(learningRate);
             }
             epoche++;
@@ -148,15 +157,29 @@ public class FFN {
     public void validate(double[][] features, double[][] labels) {
         int anzKorrektSamples = 0;
         for (int i = 0; i < features.length; i++) {
-            int[] pred = predictClass(features[i]); // Bei Multi-Label evtl. mehrere Outputs
-            if (pred.length == 1 && ((int) Math.round(labels[i][0])) == pred[0])
-                anzKorrektSamples++;
+            int pred = predictClass(features[i]);
+
+            int trueLabel = 0;
+            for (int j = 0; j < labels[i].length; j++) {
+                if (labels[i][j] == 1.0) {
+                    trueLabel = j;
+                    break;
+                }
+            }
+
+            if (pred == trueLabel) anzKorrektSamples++;
         }
         System.out.println("Testgenauigkeit: " + anzKorrektSamples / (double) features.length);
     }
 
-    public int[] predictClass(double[] features) {
-        forward(features);
-        return new int[] { (a[numLayers - 1][0] >= 0.5) ? 1 : 0 };
+    public int predictClass(double[] features) {
+        double[] out = forward(features);
+
+        int best = 0;
+        for (int i = 1; i < out.length; i++) {
+            if (out[i] > out[best]) best = i;
+        }
+        return best;
     }
+
 }
