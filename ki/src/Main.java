@@ -8,10 +8,10 @@ public class Main {
             double[][] data = Einlesen.einlesenXY(new File("KI-Projekt\\ki\\data\\data.csv"));
             double[][] trainFeatures=Einlesen.getFeatures(data);
             double[][] trainLabels=Einlesen.getLabels(data, 10);
-            int[] layerSizes={trainFeatures[0].length,20,trainLabels[0].length};
+            int[] layerSizes={trainFeatures[0].length,50,trainLabels[0].length};
             FFN netz=new FFN(layerSizes,886L);
             SoftMaxEntropy entropy =new SoftMaxEntropy();
-            netz.train(trainFeatures,trainLabels,100,0.001,entropy);
+            netz.train(trainFeatures,trainLabels,200,0.01,entropy);
 
             double[][]answers=new double[1][31];
             Einlesen.answers(answers);

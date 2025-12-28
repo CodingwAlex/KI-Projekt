@@ -50,9 +50,6 @@ public class FFN {
 
     }
 
-    public void setLayerSize(int[]layerSizes){
-        this.numLayers = layerSizes.length;
-    }
 
     private void initWeights() {
         for (int l = 1; l < numLayers; l++) {

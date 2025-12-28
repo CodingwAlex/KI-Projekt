@@ -11,6 +11,7 @@ public class Einlesen {
 
     //for training of user data(ranges of training data)
     private static final List<Double> ranges = new ArrayList<>();
+    private static final List<Double> mins = new ArrayList<>();
 
     public static double[][] einlesenXY(File datei) throws IOException {
         List<double[]> datenListe = new ArrayList<>();
@@ -81,7 +82,7 @@ public class Einlesen {
 
         if(zeilen == 1){
             for (int i = 0; i < spalten; i++) {
-                features[0][i] = features[0][i] / ranges.get(i);
+                features[0][i] = (features[0][i]-mins.get(i)) / ranges.get(i);
             }
             return;
         }
@@ -97,6 +98,7 @@ public class Einlesen {
             double range = max - min;
             if (range == 0) range = 1;
             ranges.add(range);
+            mins.add(min);
             for (int i = 0; i < zeilen; i++) {
                 features[i][j] = (features[i][j] - min) / range;
             }
