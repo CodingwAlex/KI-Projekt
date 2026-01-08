@@ -53,7 +53,7 @@ public class Einlesen {
         for (int i = 0; i < daten.length; i++) {
             int label = (int) daten[i][daten[i].length - 1];
             if (label < 0 ||  label > numClasses) {
-                throw new IllegalArgumentException("Label " + label + " ist nicht 0 oder 1");
+                throw new IllegalArgumentException("Label " + label + " ist nicht zwischen 1 und 10");
             }
             labels[i][label-1] = 1.0;
         }

@@ -5,24 +5,15 @@ public class NNMath {
         int[] result = new int[n];
         int[] pool = new int[n];
 
-        // Hilfsarray initialisieren
         for (int i = 0; i < n; i++) {
             pool[i] = i;
         }
 
-        // Fisher-Yates-Variante von hinten nach vorne
         for (int i = n - 1; i >= 0; i--) {
             int index = randG.nextInt(i + 1);
             result[i] = pool[index];
-            pool[index] = pool[i]; // Ersetze die gew�hlte Zahl mit der letzten g�ltigen
+            pool[index] = pool[i];
         }
-
-        int sum = 0;
-        for (int i = 0; i < result.length; i++)
-            sum += result[i];
-        if (sum != n * (n - 1) / 2)
-            System.out.println("Kacke");
-
         return result;
     }
 
