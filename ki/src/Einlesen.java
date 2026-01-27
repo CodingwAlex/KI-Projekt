@@ -107,7 +107,7 @@ public class Einlesen {
 
     public static void answers(double [][]data){
         Scanner in = new Scanner(System.in);
-        Path path= Paths.get("KI-Projekt\\ki\\data\\questions.txt");
+        Path path = Paths.get(  "data", "questions.txt");
         System.out.println("For the following questions, answer from 1 to 10, where 1 means \"that's not me\" and 10 means \"that's me\".");
         try(BufferedReader reader = Files.newBufferedReader(path)) {
             List<String> questions = new ArrayList<>();

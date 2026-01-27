@@ -1,11 +1,15 @@
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
 
     public static void main(String[] args) {
         try {
-            double[][] data = Einlesen.einlesenXY(new File("KI-Projekt\\ki\\data\\data.csv"));
+
+            Path path = Paths.get(  "data", "data.csv");
+            double[][] data = Einlesen.einlesenXY(path.toFile());
             double[][] trainFeatures=Einlesen.getFeatures(data);
             double[][] trainLabels=Einlesen.getLabels(data, 10);
             int[] layerSizes={trainFeatures[0].length,50,trainLabels[0].length};
